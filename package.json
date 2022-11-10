@@ -7,7 +7,11 @@
   "license": "UNLICENSED",
   "scripts": {
     "prebuild": "rimraf dist",
+    "copy:package": "node -e \"require('fs').copyFile('./package.json', './dist/package.json', function(err) { if (err) console.log(err); else console.log('package.json copied!') })\"",
+    "copy:initial-schema": "node -e \"require('fs').copyFile('src/shared/infrastructure/persistence/migrations/initial-schema.sql', './dist/shared/infrastructure/persistence/migrations/initial-schema.sql', function(err) { if (err) console.log(err); else console.log('initial-schema.sql copied!') })\"",
+    "copy:master-data": "node -e \"require('fs').copyFile('src/shared/infrastructure/persistence/migrations/master-data.sql', './dist/shared/infrastructure/persistence/migrations/master-data.sql', function(err) { if (err) console.log(err); else console.log('master-data.sql copied!') })\"",
     "build": "nest build",
+    "postbuild": "run-p copy:package copy:initial-schema copy:master-data",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",

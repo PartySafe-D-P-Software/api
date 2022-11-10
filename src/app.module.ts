@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { OrganizersModule } from './organizers/organizers.module';
+import { ClientsModule } from './clients/clients.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { AppService } from './app.service';
       ],
       migrationsTableName: 'migrations',
     }),
+    OrganizersModule,
+    ClientsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

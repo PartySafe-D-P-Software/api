@@ -6,5 +6,5 @@ import { LocalNameValue } from 'src/organizers/infrastructure/persistence/values
 @ChildEntity(UserType.ORGANIZER)
 export class OrganizerEntity extends UserEntity {
   @Column((type) => LocalNameValue, { prefix: false })
-  public companyName: LocalNameValue;
+  public localName: LocalNameValue;
 }

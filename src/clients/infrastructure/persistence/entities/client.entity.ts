@@ -5,7 +5,7 @@ import { ChildEntity, Column } from 'typeorm';
 import { DniValue } from '../values/dni.value';
 
 @ChildEntity(UserType.CLIENT)
-export class PersonEntity extends UserEntity {
+export class ClientEntity extends UserEntity {
   @Column((type) => PersonNameValue, { prefix: false })
   public name: PersonNameValue;
 

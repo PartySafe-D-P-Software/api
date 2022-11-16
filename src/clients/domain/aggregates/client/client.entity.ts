@@ -11,7 +11,7 @@ export class Client extends User {
   private dni: Dni;
 
   public constructor(phone: Phone, name: PersonName, dni: Dni) {
-    super(UserType.PERSON, phone);
+    super(UserType.CLIENT, phone);
     this.name = name;
     this.dni = dni;
   }

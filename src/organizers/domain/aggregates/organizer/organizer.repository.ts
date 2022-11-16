@@ -7,5 +7,5 @@ export interface OrganizerRepository {
   update(organizer: Organizer): Promise<Organizer>;
   delete(organizerId: number): Promise<boolean>;
   getById(id: number): Promise<Organizer>;
-  getByName(name: string): Promise<Organizer>;
+  getByLocalName(name: string): Promise<Organizer>;
 }

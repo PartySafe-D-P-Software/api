@@ -1,8 +1,8 @@
 import { Client } from './client.entity';
 
-export const PERSON_REPOSITORY = 'PersonRepository';
+export const CLIENT_REPOSITORY = 'ClientRepository';
 
-export interface PersonRepository {
+export interface ClientRepository {
   create(client: Client): Promise<Client>;
   update(client: Client): Promise<Client>;
   delete(clientId: number): Promise<boolean>;

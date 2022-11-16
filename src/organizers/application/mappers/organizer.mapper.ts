@@ -2,7 +2,6 @@ import { Organizer } from 'src/organizers/domain/aggregates/organizer/organizer.
 import { OrganizerFactory } from 'src/organizers/domain/factories/organizer.factory';
 import { OrganizerEntity } from 'src/organizers/infrastructure/persistence/entities/organizer.entity';
 import { LocalNameValue } from 'src/organizers/infrastructure/persistence/values/local-name.value';
-import { User } from 'src/shared/domain/entities/user.root.entity';
 import { LocalName } from 'src/shared/domain/values/local-name.value';
 import { Phone } from 'src/shared/domain/values/phone.value';
 import { UserId } from 'src/shared/domain/values/user-id.value';

@@ -18,19 +18,15 @@ export class RegisterClientValidator {
     registerClient: RegisterClient,
   ): Promise<AppNotification> {
     let notification: AppNotification = new AppNotification();
-    const firstName: string = registerClient.firstName
-      ? registerClient.firstName.trim()
-      : '';
+    const firstName: string = registerClient.firstName.trim();
     if (firstName.length <= 0) {
       notification.addError('firstName is required', null);
     }
-    const lastName: string = registerClient.lastName
-      ? registerClient.lastName.trim()
-      : '';
+    const lastName: string = registerClient.lastName.trim();
     if (lastName.length <= 0) {
       notification.addError('lastName is required', null);
     }
-    const dni: string = registerClient.dni ? registerClient.dni.trim() : '';
+    const dni: string = registerClient.dni.trim();
     if (dni.length <= 0) {
       notification.addError('dni is required', null);
     }
@@ -39,7 +35,6 @@ export class RegisterClientValidator {
     }
     const client: Client = await this.clientRepository.getByDni(dni);
     if (client != null) notification.addError('dni is taken', null);
-
     return notification;
   }
 }

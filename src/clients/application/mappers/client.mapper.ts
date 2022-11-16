@@ -25,7 +25,7 @@ export class ClientMapper {
     );
   }
 
-  public static domainToDtoResponse(client: Client) {
+  public static domainToDtoResponse(client: Client): RegisterClientResponse {
     return new RegisterClientResponse(
       client.getId().getValue(),
       client.getName().getFirstName(),
@@ -52,7 +52,6 @@ export class ClientMapper {
       client.getName().getFirstName(),
       client.getName().getLastName(),
     );
-    clientEntity.id = client.getId().getValue();
     clientEntity.dni = DniValue.from(client.getDni().getValue());
     clientEntity.phone = PhoneValue.from(client.getPhone().getValue());
     return clientEntity;

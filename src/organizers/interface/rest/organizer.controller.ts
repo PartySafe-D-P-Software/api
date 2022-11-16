@@ -28,6 +28,7 @@ export class OrganizerController {
       if (result.isSuccess()) {
         return ApiController.created(response, result.value);
       }
+      return ApiController.error(response, result.error.getErrors());
     } catch (error) {
       return ApiController.serverError(response, error);
     }

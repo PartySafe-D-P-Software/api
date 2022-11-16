@@ -28,10 +28,7 @@ export class RegisterOrganizerValidator {
     let company: Organizer = await this.organizerRepository.getByLocalName(
       localName,
     );
-    if (company != null) {
-      notification.addError('localName is taken', null);
-      return notification;
-    }
+    if (company != null) notification.addError('localName is taken', null);
     return notification;
   }
 }

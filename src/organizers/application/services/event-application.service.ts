@@ -5,6 +5,10 @@ import {
   MyEventRepository,
   MYEVENT_REPOSITORY,
 } from 'src/organizers/domain/aggregates/organizer/event.repository';
+import {
+  OrganizerRepository,
+  ORGANIZER_REPOSITORY,
+} from 'src/organizers/domain/aggregates/organizer/organizer.repository';
 import { AppNotification } from 'src/shared/application/app.notification';
 import { Result } from 'typescript-result';
 import { RegisterMyEventRequest } from '../dtos/register-event-request.dto';

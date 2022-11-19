@@ -64,10 +64,11 @@ CREATE TABLE IF NOT EXISTS events(
   name VARCHAR(50) NOT NULL,
   description TEXT NOT NULL,
   user_id BIGINT UNSIGNED NOT NULL,
-  district_id VARCHAR(6) NOT NULL,
+  address TEXT NOT NULL,
+  price DECIMAL NOT NULL,
+  currency VARCHAR(3) NOT NULL,
   PRIMARY KEY(id),
-  CONSTRAINT FK_events_user_id FOREIGN KEY(user_id) REFERENCES users(id),
-  CONSTRAINT FK_events_district_id FOREIGN KEY(district_id) REFERENCES districts(id)
+  CONSTRAINT FK_events_user_id FOREIGN KEY(user_id) REFERENCES users(id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS tickets(

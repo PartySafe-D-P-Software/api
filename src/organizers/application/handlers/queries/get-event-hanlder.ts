@@ -14,7 +14,10 @@ export class GetMyEventHandler {
     SELECT 
       id,
       name as myEventName,
-      description
+      description,
+      price,
+      user_id as userId,
+      address
     FROM 
       events
     ORDER BY

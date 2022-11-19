@@ -25,10 +25,10 @@ export class RegisterOrganizerValidator {
     if (notification.hasErrors()) {
       return notification;
     }
-    let company: Organizer = await this.organizerRepository.getByLocalName(
+    let organizer: Organizer = await this.organizerRepository.getByLocalName(
       localName,
     );
-    if (company != null) notification.addError('localName is taken', null);
+    if (organizer != null) notification.addError('localName is taken', null);
     return notification;
   }
 }

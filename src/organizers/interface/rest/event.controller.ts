@@ -54,4 +54,32 @@ export class MyEventController {
       return ApiController.serverError(response, error);
     }
   }
+
+  @Get('/organizerId/:organizerId')
+  async getByOrganizerId(
+    @Param('organizerId') organizerId: number,
+    @Res({ passthrough: true }) response,
+  ): Promise<object> {
+    try {
+      const myEvents = await this.myEventApplicationService.getByOrganizerId(
+        organizerId,
+      );
+      return ApiController.ok(response, myEvents);
+    } catch (error) {
+      return ApiController.serverError(response, error);
+    }
+  }
+
+  @Get('/price/:price')
+  async getByPrice(
+    @Param('price') price: number,
+    @Res({ passthrough: true }) response,
+  ): Promise<object> {
+    try {
+      const myEvents = await this.myEventApplicationService.getByPrice(price);
+      return ApiController.ok(response, myEvents);
+    } catch (error) {
+      return ApiController.serverError(response, error);
+    }
+  }
 }

@@ -5,10 +5,6 @@ import {
   MyEventRepository,
   MYEVENT_REPOSITORY,
 } from 'src/organizers/domain/aggregates/organizer/event.repository';
-import {
-  OrganizerRepository,
-  ORGANIZER_REPOSITORY,
-} from 'src/organizers/domain/aggregates/organizer/organizer.repository';
 import { AppNotification } from 'src/shared/application/app.notification';
 import { Result } from 'typescript-result';
 import { RegisterMyEventRequest } from '../dtos/register-event-request.dto';
@@ -42,5 +38,13 @@ export class MyEventApplicationService {
 
   async getById(id: number) {
     return await this.myEventRepository.getById(id);
+  }
+
+  async getByOrganizerId(organizerId: number) {
+    return await this.myEventRepository.getByOrganizerId(organizerId);
+  }
+
+  async getByPrice(price: number) {
+    return await this.myEventRepository.getByPrice(price);
   }
 }

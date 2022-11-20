@@ -1,7 +1,9 @@
 import { MyEvent } from 'src/organizers/domain/aggregates/organizer/event.entity';
 import { MyEventFactory } from 'src/organizers/domain/factories/event.factory';
 import { MyEventEntity } from 'src/organizers/infrastructure/persistence/entities/event.entity';
+import { AddressValue } from 'src/organizers/infrastructure/persistence/values/address.value';
 import { MyEventNameValue } from 'src/organizers/infrastructure/persistence/values/event-name.value';
+import { MoneyValue } from 'src/organizers/infrastructure/persistence/values/money.value';
 import { Currency } from 'src/shared/domain/enums/currency.enum';
 import { Address } from 'src/shared/domain/values/address.value';
 import { MyEventId } from 'src/shared/domain/values/event-id.value';
@@ -59,6 +61,12 @@ export class MyEventMapper {
       myEvent.getMyEventName().getValue(),
     );
     myEventEntity.description = myEvent.getDescription();
+    myEventEntity.price = MoneyValue.from(
+      myEvent.getPrice().getAmount(),
+      Currency.SOLES,
+    );
+    myEventEntity.address = AddressValue.from(myEvent.getAddress().getValue());
+    myEventEntity.organizer.id = myEvent.getUserId().getValue();
     return myEventEntity;
   }
 

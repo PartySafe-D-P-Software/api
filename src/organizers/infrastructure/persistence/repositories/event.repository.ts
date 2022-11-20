@@ -45,4 +45,28 @@ export class MyEventEntityRepository implements MyEventRepository {
       .getOne();
     return MyEventMapper.entityToDomain(myEventEntity);
   }
+
+  async getByOrganizerId(organizerId: number): Promise<MyEvent[]> {
+    let myEventEntities: MyEventEntity[] = await this.myEventRepository
+      .createQueryBuilder('myEvent')
+      .where('myEvent.organizer.id = :organizerId', {
+        organizerId: organizerId,
+      })
+      .getMany();
+    return myEventEntities.map((myEventEntity) =>
+      MyEventMapper.entityToDomain(myEventEntity),
+    );
+  }
+
+  async getByPrice(price: number): Promise<MyEvent[]> {
+    let myEventEntities: MyEventEntity[] = await this.myEventRepository
+      .createQueryBuilder('myEvent')
+      .where('myEvent.price <= :price', {
+        price: price,
+      })
+      .getMany();
+    return myEventEntities.map((myEventEntity) =>
+      MyEventMapper.entityToDomain(myEventEntity),
+    );
+  }
 }

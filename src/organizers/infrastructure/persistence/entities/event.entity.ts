@@ -1,3 +1,4 @@
+import { Organizer } from 'src/organizers/domain/aggregates/organizer/organizer.entity';
 import {
   Column,
   Entity,
@@ -27,7 +28,7 @@ export class MyEventEntity {
 
   @ManyToOne(() => OrganizerEntity, (organizer) => organizer.myEvents)
   @JoinColumn({ referencedColumnName: 'id', name: 'user_id' })
-  organizer: OrganizerEntity;
+  public organizer: OrganizerEntity = new OrganizerEntity();
 
   @Column(() => AddressValue, { prefix: false })
   public address: AddressValue;

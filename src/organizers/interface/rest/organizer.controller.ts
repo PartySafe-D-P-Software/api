@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RegisterOrganizerRequest } from 'src/organizers/application/dtos/register-organizer-request.dto';
 import { RegisterOrganizerResponse } from 'src/organizers/application/dtos/register-organizer-response.dto';
 import { GetOrganizerUsers } from 'src/organizers/application/messages/queries/get-organizer-users.query';
@@ -9,6 +10,7 @@ import { ApiController } from 'src/shared/interface/rest/api-controller';
 import { Result } from 'typescript-result';
 
 @Controller('users/organizer')
+@ApiTags('organizer user')
 export class OrganizerController {
   constructor(
     private readonly organizerApplicationService: OrganizerApplicationService,
@@ -16,6 +18,7 @@ export class OrganizerController {
   ) {}
 
   @Post('')
+  @ApiOperation({ summary: 'Register an organizer' })
   async register(
     @Body() registerOrganizerRequest: RegisterOrganizerRequest,
     @Res({ passthrough: true }) response,
@@ -35,6 +38,7 @@ export class OrganizerController {
   }
 
   @Get('')
+  @ApiOperation({ summary: 'Get all organizers' })
   async getAll(@Res({ passthrough: true }) response): Promise<object> {
     try {
       const organizers = await this.queryBus.execute(new GetOrganizerUsers());
@@ -45,6 +49,7 @@ export class OrganizerController {
   }
 
   @Get('/:id')
+  @ApiOperation({ summary: 'Get an organizer by id' })
   async getById(
     @Param('id') id: number,
     @Res({ passthrough: true }) response,

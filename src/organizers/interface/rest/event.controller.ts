@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RegisterMyEventRequest } from 'src/organizers/application/dtos/register-event-request.dto';
 import { RegisterMyEventResponse } from 'src/organizers/application/dtos/register-event-response.dto';
 import { GetMyEvent } from 'src/organizers/application/messages/queries/get-event.query';
@@ -9,6 +10,7 @@ import { ApiController } from 'src/shared/interface/rest/api-controller';
 import { Result } from 'typescript-result';
 
 @Controller('events')
+@ApiTags('event')
 export class MyEventController {
   constructor(
     private readonly myEventApplicationService: MyEventApplicationService,
@@ -16,6 +18,7 @@ export class MyEventController {
   ) {}
 
   @Post('')
+  @ApiOperation({ summary: 'Register an event' })
   async register(
     @Body() registerMyEventRequest: RegisterMyEventRequest,
     @Res({ passthrough: true }) response,
@@ -33,6 +36,7 @@ export class MyEventController {
   }
 
   @Get('')
+  @ApiOperation({ summary: 'Get all events' })
   async getAll(@Res({ passthrough: true }) response): Promise<object> {
     try {
       const myEvents = await this.queryBus.execute(new GetMyEvent());
@@ -43,6 +47,7 @@ export class MyEventController {
   }
 
   @Get('/:id')
+  @ApiOperation({ summary: 'Get an event by id' })
   async getById(
     @Param('id') id: number,
     @Res({ passthrough: true }) response,
@@ -56,6 +61,7 @@ export class MyEventController {
   }
 
   @Get('/organizerId/:organizerId')
+  @ApiOperation({ summary: 'Get events by organizer id' })
   async getByOrganizerId(
     @Param('organizerId') organizerId: number,
     @Res({ passthrough: true }) response,
@@ -71,6 +77,7 @@ export class MyEventController {
   }
 
   @Get('/price/:price')
+  @ApiOperation({ summary: 'Get events by price' })
   async getByPrice(
     @Param('price') price: number,
     @Res({ passthrough: true }) response,

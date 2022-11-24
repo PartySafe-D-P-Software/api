@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { RegisterClientRequest } from 'src/clients/application/dtos/register-client-request.dto';
 import { RegisterClientResponse } from 'src/clients/application/dtos/register-client-response.dto';
 import { GetClientUsers } from 'src/clients/application/messages/queries/get-client-users.query';
@@ -9,6 +10,7 @@ import { ApiController } from 'src/shared/interface/rest/api-controller';
 import { Result } from 'typescript-result';
 
 @Controller('users/client')
+@ApiTags('client user')
 export class ClientController {
   constructor(
     private readonly clientApplicationService: ClientApplicationService,
@@ -16,6 +18,7 @@ export class ClientController {
   ) {}
 
   @Post('')
+  @ApiOperation({ summary: 'Register a client' })
   async register(
     @Body() registerClientRequest: RegisterClientRequest,
     @Res({ passthrough: true }) response,
@@ -33,6 +36,7 @@ export class ClientController {
   }
 
   @Get('')
+  @ApiOperation({ summary: 'Get all clients' })
   async getAll(@Res({ passthrough: true }) response): Promise<object> {
     try {
       const clients = await this.queryBus.execute(new GetClientUsers());
@@ -43,6 +47,7 @@ export class ClientController {
   }
 
   @Get('/:id')
+  @ApiOperation({ summary: 'Get a client by id' })
   async getById(
     @Param('id') id: number,
     @Res({ passthrough: true }) response,
